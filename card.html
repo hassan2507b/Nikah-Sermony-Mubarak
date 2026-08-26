@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikkah Invitation Card - Printable PDF</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+           background-color: #f7f3ed;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 252, 247, 0.95), #eae3d9),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l40 40-40 40L0 40z' fill='%23c5a059' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            
+           color: #3e332a;
+           font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px 15px;
+        }
+
+        /* Action Bar for PDF Generation */
+        .pdf-action-bar {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .pdf-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #059669 100%);
+            border: none;
+            color: #ffffff;
+            padding: 14px 28px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+        }
+
+        /* Responsive Printable Card Dimensions */
+        .pdf-card {
+            width: 100%;
+            max-width: 480px;
+      color: #4a3b2c; text-transform: uppercase; margin-bottom: 5px;
+            border: 2px solid #d4af37;
+            border-radius: 24px;
+            padding: clamp(20px, 5vw, 40px) clamp(15px, 4vw, 30px);
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Card Inner Border Frame */
+        .card-frame {
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: clamp(20px, 4vw, 30px) clamp(12px, 3vw, 20px);
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .card-frame::before {
+            content: "❖";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #07130d;
+            padding: 0 10px;
+            color: #d4af37;
+            font-size: 1rem;
+        }
+
+    .gradient-text {
+    background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block; /* Line artifacts ko khatam karne ke liye */
+}
+
+        .bismillah {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 18px;
+        }
+
+        .hosts {
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            font-weight: 600;
+            color: #161402;
+            margin-bottom: 8px;
+        }
+
+        .sub-text {
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #161402;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .couple-name {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: clamp(2.8rem, 10vw, 4rem);
+            color: #161402;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            line-height: 1.1;
+            word-break: break-word;
+        }
+
+        .and-symbol {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin: 5px 0;
+            display: block;
+        }
+
+        .event-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            letter-spacing: 2px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4af37, #ec4899, transparent);
+            margin: 18px auto;
+            width: 80%;
+        }
+
+        .date-box {
+            font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+            font-weight: 700;
+            color: #161402;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .timing-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            margin: 15px 0;
+            gap: 5px;
+        }
+
+        .time-item {
+            flex: 1;
+        }
+
+        .time-item i {
+            color: #d4af37;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .time-item p {
+            font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .time-item span {
+            font-size: clamp(0.6rem, 1.8vw, 0.7rem);
+            color: #161402;
+            display: block;
+        }
+
+        .time-sep {
+            width: 1px;
+            height: 35px;
+            background: rgba(212, 175, 55, 0.4);
+        }
+
+        .address {
+            font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+            color: #161402;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .landmark {
+            color: #d4af37;
+            font-weight: 500;
+            display: block;
+            margin-top: 4px;
+            font-size: clamp(0.68rem, 2vw, 0.75rem);
+        }
+
+        /* Mobile Adjustments */
+        @media screen and (max-width: 380px) {
+            body {
+                padding: 10px 8px;
+            }
+            .pdf-card {
+                border-radius: 16px;
+            }
+            .card-frame {
+                border-radius: 12px;
+            }
+        }
+
+        /* Media Print Settings for High Quality PDF */
+        @media print {
+            body {
+                background: none !important;
+                padding: 0 !important;
+            }
+
+            .pdf-action-bar {
+                display: none !important;
+            }
+
+            .pdf-card {
+                box-shadow: none !important;
+                border: 2px solid #d4af37 !important;
+                page-break-inside: avoid;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                width: 100% !important;
+                max-width: 500px !important;
+                margin: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PDF Download Top Bar -->
+    <div class="pdf-action-bar">
+        <button class="pdf-btn" onclick="downloadPDF()">
+            <i class="fa-solid fa-file-pdf"></i> Download PDF Card
+        </button>
+    </div>
+
+    <!-- Card Content Area -->
+    <div class="pdf-card" id="cardContent">
+        <div class="card-frame">
+            <div class="bismillah gradient-text">In The Name Of Allah</div>
+            
+            <div class="hosts">Mr. & Mrs. Muhammad Imran Ansari</div>
+            <div class="sub-text">cordially request the honor of your presence at the Nikkah ceremony of their daughter</div>
+            
+            <div class="couple-name">Kashaf</div>
+            <div class="and-symbol gradient-text">&</div>
+            <div class="couple-name">Shayan</div>
+
+            <div class="divider"></div>
+
+            <div class="event-title gradient-text">Save The Date</div>
+            <div class="date-box">Sunday, 10th January 2027</div>
+
+            <div class="timing-grid">
+                <div class="time-item">
+                    <i class="fa-solid fa-scroll"></i>
+                    <p>02:00 PM</p>
+                    <span>Nikkah Ceremony</span>
+                </div>
+                <div class="time-sep"></div>
+                <div class="time-item">
+                    <i class="fa-solid fa-utensils"></i>
+                    <p>03:00 PM</p>
+                    <span>Dinner Served</span>
+                </div>
+            </div>
+
+            <div class="address">
+                Victoria Palace 2nd Floor, Comm Plot No. III-C, 1/14,<br>Nazimabad No. 3, KDA'S Sch-3, Karachi.
+                <span class="landmark">(Opp. Imtiaz Store, Above Qasr-e-Shireen)</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

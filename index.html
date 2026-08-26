@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Royal Nikkah | Kashaf & Shayan</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        /* Ivory & Warm Beige Royal Floral Background Theme */
+        body {
+            background-color: #f7f3ed;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 252, 247, 0.95), #eae3d9),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l40 40-40 40L0 40z' fill='%23c5a059' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: #3e332a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow Backgrounds - Soft Gold & Warm Ivory Theme */
+        .bg-glow-1 {
+            position: fixed; top: -10%; left: -10%; width: 65vw; height: 65vw;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(245, 235, 220, 0.4) 50%, rgba(255,255,255,0) 70%);
+            border-radius: 50%; pointer-events: none; z-index: 1; filter: blur(100px);
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+        .bg-glow-2 {
+            position: fixed; bottom: -10%; right: -10%; width: 65vw; height: 65vw;
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.18) 0%, rgba(230, 215, 195, 0.3) 50%, rgba(255,255,255,0) 70%);
+            border-radius: 50%; pointer-events: none; z-index: 1; filter: blur(100px);
+            animation: floatGlow 15s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 40px) scale(1.1); }
+        }
+
+        /* Floating Top Controls */
+        .controls-bar {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; gap: 10px; background: rgba(255, 252, 247, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 8px 14px; border-radius: 40px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            opacity: 0; visibility: hidden; transition: all 1s ease;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: transparent; border: none; color: #9a7b38;
+            width: 38px; height: 38px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; font-size: 1rem; transition: all 0.3s ease;
+            position: relative;
+        }
+        .control-btn:hover { background: rgba(197, 160, 89, 0.15); color: #4a3b2c; transform: scale(1.1); }
+
+        /* Equalizer Animation */
+        .equalizer { display: flex; gap: 3px; align-items: flex-end; height: 16px; }
+        .eq-bar { width: 3px; background: #9a7b38; border-radius: 2px; animation: eq 1s infinite alternate ease-in-out; }
+        .eq-bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
+        .eq-bar:nth-child(2) { height: 100%; animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { height: 40%; animation-delay: 0.2s; }
+        @keyframes eq { 0% { height: 20%; } 100% { height: 100%; } }
+        .paused .eq-bar { animation-play-state: paused; height: 30% !important; }
+
+        /* Toast Component */
+        #toast {
+            position: fixed; bottom: 30px; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, #c5a059, #8c6a27);
+            color: #ffffff; padding: 12px 28px; border-radius: 50px;
+            font-weight: 700; font-size: 0.85rem; z-index: 9999; opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        #particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; opacity: 0; transition: opacity 1.5s ease; }
+
+        /* Welcome Entry Screen - Ivory & Gold Royal Theme */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: radial-gradient(circle, #fcf9f2 0%, #e6ded1 100%);
+            display: flex; justify-content: center; align-items: center; z-index: 999;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+            padding: 20px;
+        }
+
+        .welcome-card {
+            text-align: center; padding: 45px 30px;
+            background: rgba(255, 253, 249, 0.88);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            border-radius: 28px; box-shadow: 0 20px 60px rgba(74, 59, 44, 0.12);
+            max-width: 420px; width: 100%;
+            display: flex; flex-direction: column; align-items: center; gap: 15px;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 20px 60px rgba(74, 59, 44, 0.1), 0 0 15px rgba(197, 160, 89, 0.2); }
+            100% { box-shadow: 0 20px 60px rgba(74, 59, 44, 0.15), 0 0 35px rgba(197, 160, 89, 0.4); }
+        }
+
+        .welcome-subtitle {
+            font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 4px;
+            color: #8c6a27; text-transform: uppercase; margin-bottom: 5px;
+        }
+
+        .welcome-title {
+            font-family: 'Cinzel', serif; color: #4a3b2c;
+            font-size: 1.4rem; font-weight: 700; letter-spacing: 3px;
+            line-height: 1.5; margin-bottom: 5px; text-transform: uppercase;
+        }
+
+        .couple-names-preview {
+            font-family: 'Great Vibes', cursive; font-size: 2.8rem;
+            color: #8c6a27; text-shadow: 0 0 10px rgba(197, 160, 89, 0.2);
+            margin-bottom: 15px; line-height: 1.2;
+        }
+
+        .open-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #8c6a27 100%);
+            border: none; color: #ffffff; padding: 16px 36px; font-size: 0.85rem;
+            font-family: 'Cinzel', serif; font-weight: 700; border-radius: 50px;
+            cursor: pointer; box-shadow: 0 10px 25px rgba(197, 160, 89, 0.4);
+            transition: all 0.4s ease; letter-spacing: 2px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            white-space: nowrap; width: 100%; max-width: 260px;
+        }
+        .open-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 15px 35px rgba(197, 160, 89, 0.6); }
+
+        /* Main Content Structure */
+        #invitation-content { opacity: 0; visibility: hidden; transition: opacity 1.5s ease; position: relative; z-index: 3; }
+        section { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 80px 20px; }
+        
+        .card-container {
+            background: rgba(255, 253, 248, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 32px; padding: 45px 30px;
+            max-width: 550px; width: 100%; text-align: center; box-shadow: 0 20px 50px rgba(74, 59, 44, 0.08);
+            position: relative; overflow: hidden; transition: transform 0.3s ease;
+        }
+        .card-container:hover { transform: translateY(-5px); }
+
+        .border-pattern { border: 1px solid rgba(197, 160, 89, 0.3); padding: 35px 20px; border-radius: 20px; }
+        
+        /* Gold & Warm Brown Text Gradients */
+        .gradient-text {
+            background: linear-gradient(135deg, #a37c3f 0%, #614627 50%, #8c6a27 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1.2;
+            padding: 2px 0;
+        }
+        .bismillah { font-family: 'Cinzel Decorative', serif; font-size: 1.4rem; margin-bottom: 20px; }
+        .hosts { font-size: 1.1rem; font-weight: 600; color: #5a4632; margin-bottom: 10px; }
+        .sub-text { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #7a6855; margin-bottom: 25px; line-height: 1.6; }
+        .couple-name { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: #4a3b2c; text-shadow: 0 0 10px rgba(197, 160, 89, 0.2); line-height: 1; }
+        .and-symbol { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; margin: 10px 0; display: inline-block; }
+        .event-title { font-family: 'Cinzel Decorative', serif; font-size: 1.6rem; letter-spacing: 2px; margin-bottom: 15px; }
+        .date-box { font-size: 1.2rem; font-weight: 700; color: #4a3b2c; margin-bottom: 20px; letter-spacing: 1px; }
+        .address { font-size: 0.95rem; color: #5a4632; line-height: 1.7; font-weight: 400; margin-bottom: 20px; }
+        .landmark { color: #8c6a27; font-weight: 600; display: block; margin-top: 5px; font-size: 0.85rem; }
+        .divider { height: 1px; background: linear-gradient(to right, transparent, #c5a059, #8c6a27, transparent); margin: 25px auto; width: 80%; }
+
+        .color-palette { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+        .color-circle { width: 38px; height: 38px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.1); transition: transform 0.3s; cursor: pointer; }
+        .color-circle:hover { transform: scale(1.2) rotate(10deg); }
+
+        .gallery-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 10px; scrollbar-width: none; }
+        .gallery-slider::-webkit-scrollbar { display: none; }
+        .gallery-item { min-width: 100%; scroll-snap-align: center; border-radius: 16px; overflow: hidden; height: 240px; border: 1px solid rgba(197, 160, 89, 0.4); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-item:hover img { transform: scale(1.08); }
+
+        .wishes-container { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .wish-chip { background: rgba(245, 238, 226, 0.7); border: 1px solid rgba(197, 160, 89, 0.4); padding: 12px 16px; border-radius: 30px; font-size: 0.8rem; color: #5a4632; cursor: pointer; transition: all 0.3s; font-weight: 500; }
+        .wish-chip:hover { border-color: #8c6a27; background: rgba(197, 160, 89, 0.15); transform: translateX(5px); }
+
+        .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .action-btn {
+            display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid #c5a059; color: #6a5228;
+            padding: 12px 24px; border-radius: 40px; text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase;
+            transition: all 0.3s ease; font-weight: 600; cursor: pointer;
+        }
+        .action-btn:hover { background: rgba(197, 160, 89, 0.15); color: #3e332a; border-color: #8c6a27; transform: translateY(-2px); }
+        .btn-solid { background: linear-gradient(135deg, #c5a059, #8c6a27); color: white; border: none; }
+
+        .timer-container { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
+        .timer-box { background: rgba(245, 238, 226, 0.8); border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 14px; padding: 12px; min-width: 70px; }
+        .timer-val { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: #8c6a27; }
+        .timer-label { font-size: 0.6rem; text-transform: uppercase; color: #7a6855; margin-top: 4px; }
+
+        /* RSVP Modal */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(74, 59, 44, 0.4); backdrop-filter: blur(10px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .modal.active { opacity: 1; pointer-events: all; }
+        .modal-card {
+            background: #fdfbf7; border: 1px solid #c5a059; padding: 30px; border-radius: 24px;
+            max-width: 400px; width: 90%; text-align: center; position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .modal-card input, .modal-card select {
+            width: 100%; padding: 12px; margin: 8px 0; background: rgba(0,0,0,0.03);
+            border: 1px solid rgba(197,160,89,0.4); border-radius: 8px; color: #3e332a; outline: none;
+        }
+        .modal-card input:focus { border-color: #8c6a27; }
+        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; color: #8c6a27; }
+
+        /* Mouse Trail Sparkle - Soft Warm Gold */
+        .sparkle {
+            position: fixed; width: 6px; height: 6px; border-radius: 50%;
+            background: #c5a059; pointer-events: none; z-index: 9999;
+            animation: fadeOut 0.8s linear forwards;
+        }
+        @keyframes fadeOut { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(2.5); } }
+
+        @media (max-width: 480px) {
+            .couple-name { font-size: 3.5rem; }
+            .welcome-title { font-size: 1.2rem; }
+            .couple-names-preview { font-size: 2.3rem; }
+            .card-container { padding: 30px 18px; }
+            .timer-box { min-width: 55px; padding: 8px 4px; }
+            .timer-val { font-size: 1.1rem; }
+            .btn-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+    <canvas id="particleCanvas"></canvas>
+
+    <div id="toast">Notification</div>
+
+    <div class="controls-bar" id="floatingControls">
+        <button class="control-btn" id="musicToggle" onclick="toggleMusic()">
+            <div class="equalizer paused" id="equalizer">
+                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+            </div>
+        </button>
+    </div>
+    
+<audio id="bgMusic" loop src="muisic.mp4"></audio>
+
+    <!-- Welcome Entry Screen -->
+    <div id="welcome-screen">
+        <div class="welcome-card">
+            <div class="welcome-subtitle">The Wedding Invitation</div>
+            <div class="welcome-title">The Nikkah Ceremony</div>
+            <div class="couple-names-preview">Kashaf & Shayan</div>
+            <button class="open-btn" onclick="openInvitation()">
+                <i class="fa-solid fa-sparkles"></i> OPEN CARD <i class="fa-solid fa-sparkles"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- RSVP Modal -->
+    <div class="modal" id="rsvpModal">
+        <div class="modal-card">
+            <i class="fa-solid fa-xmark close-modal" onclick="toggleRSVP()"></i>
+            <h3 class="gradient-text" style="font-family: 'Cinzel', serif; margin-bottom: 15px;">RSVP Confirmation</h3>
+            <input type="text" id="guestName" placeholder="Your Full Name">
+            <select id="guestAttending">
+                <option value="Joyfully Accepts">Joyfully Accepts</option>
+                <option value="Regretfully Declines">Regretfully Declines</option>
+            </select>
+            <input type="number" id="guestCount" placeholder="Number of Guests" min="1" max="10">
+            <button onclick="submitRSVP()" class="action-btn btn-solid" style="width: 100%; margin-top: 15px; justify-content: center;">Confirm Attendance</button>
+        </div>
+    </div>
+
+    <!-- Invitation Body -->
+    <div id="invitation-content">
+        <section id="home">
+            <div class="card-container">
+                <div class="border-pattern">
+                    <div class="bismillah gradient-text" data-aos="fade-down">In the name of Allah, <br > THE MOST GRACIOUS, THE MOST MERCIFUL</div>
+                    <div class="hosts" data-aos="fade-up" data-aos-delay="200">Mr. & Mrs. Muhammad Imran Ansari</div>
+                    <div class="sub-text" data-aos="fade-up" data-aos-delay="300"> Request the pleasure of your company at the Nikkah Ceremony of their daughter </div>
+                    <div class="couple-name" data-aos="zoom-in" data-aos-delay="500">Kashaf</div>
+                    <div class="and-symbol gradient-text" data-aos="fade-in" data-aos-delay="700">&</div>
+                    <div class="couple-name" data-aos="zoom-in" data-aos-delay="900">Shayan</div>
+                           <div class="hosts" data-aos="fade-up" data-aos-delay="200">Son of Mr. & Mrs. Muhammad Sabir</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="date">
+            <div class="card-container">
+                <div class="border-pattern">
+                    <div class="event-title gradient-text" data-aos="fade-down">Save The Date</div>
+                    <div class="divider" data-aos="zoom-in"></div>
+                    <div class="date-box" data-aos="fade-up">Sunday, 10th January 2027</div>
+
+                    <div style="display: flex; justify-content: space-around; align-items: center; margin: 25px 0; background: rgba(245,238,226,0.5); padding: 20px 15px; border-radius: 16px; border: 1px solid rgba(197, 160, 89, 0.3);" data-aos="zoom-in">
+                        <div style="flex: 1; text-align: center;">
+                            <i class="fa-solid fa-scroll" style="color: #8c6a27; font-size: 1.4rem;"></i>
+                            <p style="font-weight: 700; font-size: 0.95rem; margin-top: 6px; color: #4a3b2c;">02:00 PM</p>
+                            <p style="font-size: 0.75rem; color: #7a6855; margin-top: 2px;">Nikkah Ceremony</p>
+                        </div>
+
+                        <!-- Center Separator Line -->
+                        <div style="width: 1px; height: 45px; background: linear-gradient(to bottom, transparent, rgba(197, 160, 89, 0.6), transparent);"></div>
+
+                        <div style="flex: 1; text-align: center;">
+                            <i class="fa-solid fa-utensils" style="color: #8c6a27; font-size: 1.4rem;"></i>
+                            <p style="font-weight: 700; font-size: 0.95rem; margin-top: 6px; color: #4a3b2c;">03:00 PM</p>
+                            <p style="font-size: 0.75rem; color: #7a6855; margin-top: 2px;">Dinner Served</p>
+                        </div>
+                    </div>
+
+                    <div class="btn-group" data-aos="fade-up" data-aos-delay="200">
+                        <button onclick="addToCalendar()" class="action-btn btn-solid"><i class="fa-regular fa-calendar-plus"></i> Google Calendar</button>
+                        <a href="card.html" target="_blank" class="action-btn"><i class="fa-solid fa-calendar-check"></i> Download Cards</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="venue">
+            <div class="card-container">
+                <div class="border-pattern">
+                    <div class="event-title gradient-text" data-aos="fade-down">Venue Location</div>
+                    <div class="divider" data-aos="zoom-in"></div>
+                    <div class="address" data-aos="fade-up">
+                        Victoria Palace 2nd Floor, Comm Plot No. III-C, 1/14,<br>Nazimabad No. 3, KDA'S Sch-3, Karachi.
+                        <span class="landmark">(Opp. Imtiaz Store, Above Qasr-e-Shireen)</span>
+                    </div>
+
+                    <div class="btn-group" data-aos="fade-up" data-aos-delay="200">
+                        <a href="https://maps.google.com/?q=Qasr-e-Shireen,Nazimabad,Karachi" target="_blank" class="action-btn btn-solid"><i class="fa-solid fa-location-dot"></i> Google Maps</a>
+                        <button onclick="copyAddress()" class="action-btn"><i class="fa-regular fa-copy"></i> Copy Address</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="card-container">
+                <div class="border-pattern">
+                    <div class="event-title gradient-text" data-aos="fade-down">Moments <br> Nikah Ceremony</div>
+                    <div class="divider" data-aos="zoom-in"></div>
+                    
+                    <div class="gallery-slider" data-aos="zoom-in">
+                        <div class="gallery-item"><img src="image.png" alt="Wedding"></div>
+                        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Wedding"></div>
+                    </div>
+                    <p style="font-size: 0.75rem; color: #8c6a27; margin-top: 10px;">← Swipe to view more →</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blessings">
+            <div class="card-container">
+                <div class="border-pattern">
+                    <div class="event-title gradient-text" data-aos="fade-down">Send Blessings</div>
+                    <div class="sub-text" data-aos="fade-up">Click to send a Whatsapp Message </div>
+                    <div class="divider" data-aos="zoom-in"></div>
+
+                    <div class="wishes-container" data-aos="fade-up">
+                        <div class="wish-chip" onclick="sendWish('Thank you ! We look forward to your prayers and presence')">Thank you !We look forward to your prayers and presence </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: false, mirror: true });
+
+        const EVENT_DATE = new Date('January 10, 2027 18:00:00').getTime();
+        const ADDRESS_TEXT = "Victoria Palace 2nd Floor, Comm Plot No. III-C, 1/14, Nazimabad No. 3, KDA'S Sch-3, Karachi.";
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function openInvitation() {
+            confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+
+            document.getElementById('welcome-screen').style.transform = 'translateY(-100vh)';
+            document.getElementById('welcome-screen').style.opacity = '0';
+            
+            setTimeout(() => {
+                document.getElementById('welcome-screen').style.display = 'none';
+                document.getElementById('invitation-content').style.visibility = 'visible';
+                document.getElementById('invitation-content').style.opacity = '1';
+                document.getElementById('particleCanvas').style.opacity = '1';
+                document.getElementById('floatingControls').style.visibility = 'visible';
+                document.getElementById('floatingControls').style.opacity = '1';
+                AOS.refresh();
+                
+                const audio = document.getElementById('bgMusic');
+                audio.play().then(() => {
+                    document.getElementById('equalizer').classList.remove('paused');
+                }).catch(() => console.log("Autoplay paused"));
+            }, 800);
+        }
+
+        function toggleMusic() {
+            const bgMusic = document.getElementById('bgMusic');
+            const eq = document.getElementById('equalizer');
+            if (bgMusic.paused) {
+                bgMusic.play();
+                eq.classList.remove('paused');
+                showToast("Playing Music 🎵");
+            } else {
+                bgMusic.pause();
+                eq.classList.add('paused');
+                showToast("Music Paused");
+            }
+        }
+
+        function toggleRSVP() {
+            document.getElementById('rsvpModal').classList.toggle('active');
+        }
+
+        function submitRSVP() {
+            const name = document.getElementById('guestName').value;
+            const attending = document.getElementById('guestAttending').value;
+            const count = document.getElementById('guestCount').value || 1;
+
+            if (!name) { showToast("Please enter your name!"); return; }
+
+            const text = `RSVP Response:\nName: ${name}\nStatus: ${attending}\nGuests: ${count}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            toggleRSVP();
+            showToast("RSVP Sent via WhatsApp!");
+        }
+
+        function triggerConfettiColor(color) {
+            confetti({ particleCount: 40, spread: 60, colors: [color] });
+        }
+
+        async function shareEvent() {
+            const shareData = { title: 'Nikkah Invitation | Kashaf & Shayan', text: 'You are cordially invited to celebrate the Nikkah of Kashaf & Shayan.', url: window.location.href };
+            try {
+                if (navigator.share) { await navigator.share(shareData); } 
+                else { navigator.clipboard.writeText(window.location.href); showToast("Invitation Link Copied!"); }
+            } catch (err) {}
+        }
+
+        function copyAddress() {
+            navigator.clipboard.writeText(ADDRESS_TEXT).then(() => showToast("Address Copied!"));
+        }
+
+        function addToCalendar() {
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent("Kashaf & Shayan Nikkah Ceremony")}&details=${encodeURIComponent("Please join us to celebrate our Nikkah ceremony.")}&location=${encodeURIComponent(ADDRESS_TEXT)}&dates=20270110T130000Z/20270110T180000Z`;
+            window.open(url, '_blank');
+        }
+
+        function downloadICS() {
+            const icsData = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:Kashaf & Shayan Nikkah Ceremony\nLOCATION:${ADDRESS_TEXT}\nDTSTART:20270110T130000Z\nDTEND:20270110T180000Z\nEND:VEVENT\nEND:VCALENDAR`;
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Kashaf_Shayan_Nikkah.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("Calendar File Downloaded!");
+        }
+
+        function sendWish(wishMessage) {
+            window.open(`https://wa.me/?text=${encodeURIComponent(wishMessage)}`, '_blank');
+        }
+
+        // Mouse Trail Effects - Warm Gold Sparkles
+        window.addEventListener('mousemove', (e) => {
+            if(Math.random() < 0.15) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 800);
+            }
+        });
+
+        // Floating Particles Canvas (Warm Gold Theme)
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() { this.reset(); this.y = Math.random() * canvas.height; }
+            reset() { this.x = Math.random() * canvas.width; this.y = canvas.height + 20; this.size = Math.random() * 2 + 1; this.speed = Math.random() * 0.7 + 0.3; this.alpha = Math.random() * 0.4 + 0.2; }
+            draw() { ctx.fillStyle = `rgba(197, 160, 89, ${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+            update() { this.y -= this.speed; if (this.y < -10) this.reset(); this.draw(); }
+        }
+        for(let i = 0; i < 40; i++) particles.push(new Particle());
+        function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => p.update()); requestAnimationFrame(animateParticles); }
+        animateParticles();
+    </script>
+</body>
+</html>
