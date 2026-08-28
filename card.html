@@ -12,13 +12,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-           background-color: #f7f3ed;
+            background-color: #f7f3ed;
             background-image: 
                 radial-gradient(circle at 50% 50%, rgba(255, 252, 247, 0.95), #eae3d9),
                 url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0l40 40-40 40L0 40z' fill='%23c5a059' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-            
-           color: #3e332a;
-           font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #3e332a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,7 +37,7 @@
         }
 
         .pdf-btn {
-            background: linear-gradient(135deg, #d4af37 0%, #059669 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #8c6a27 100%);
             border: none;
             color: #ffffff;
             padding: 14px 28px;
@@ -47,7 +46,7 @@
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.4);
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -56,28 +55,28 @@
 
         .pdf-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.6);
         }
 
         /* Responsive Printable Card Dimensions */
         .pdf-card {
             width: 100%;
-            max-width: 480px;
-      color: #4a3b2c; text-transform: uppercase; margin-bottom: 5px;
-            border: 2px solid #d4af37;
-            border-radius: 24px;
-            padding: clamp(20px, 5vw, 40px) clamp(15px, 4vw, 30px);
+            max-width: 500px;
+            background: rgba(255, 253, 248, 0.92);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            border-radius: 28px;
+            padding: clamp(20px, 5vw, 35px) clamp(15px, 4vw, 25px);
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 20px 50px rgba(74, 59, 44, 0.08);
             position: relative;
             overflow: hidden;
         }
 
         /* Card Inner Border Frame */
         .card-frame {
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            border: 1px solid rgba(197, 160, 89, 0.3);
             padding: clamp(20px, 4vw, 30px) clamp(12px, 3vw, 20px);
-            border-radius: 16px;
+            border-radius: 20px;
             position: relative;
         }
 
@@ -87,56 +86,56 @@
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: #07130d;
+            background: #f7f3ed;
             padding: 0 10px;
-            color: #d4af37;
+            color: #8c6a27;
             font-size: 1rem;
         }
 
-    .gradient-text {
-    background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #f472b6 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    display: inline-block; /* Line artifacts ko khatam karne ke liye */
-}
+        .gradient-text {
+            background: linear-gradient(135deg, #a37c3f 0%, #614627 50%, #8c6a27 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
+            line-height: 1.3;
+        }
 
         .bismillah {
             font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-size: clamp(1rem, 3vw, 1.2rem);
             margin-bottom: 18px;
         }
 
         .hosts {
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             font-weight: 600;
-            color: #161402;
-            margin-bottom: 8px;
+            color: #5a4632;
+            margin-bottom: 6px;
         }
 
         .sub-text {
             font-size: clamp(0.65rem, 2vw, 0.75rem);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #161402;
-            margin-bottom: 20px;
+            color: #7a6855;
+            margin-bottom: 15px;
             line-height: 1.5;
         }
 
         .couple-name {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: clamp(2.8rem, 10vw, 4rem);
-            color: #161402;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-            line-height: 1.1;
-            word-break: break-word;
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 4.2rem);
+            color: #4a3b2c;
+            text-shadow: 0 0 10px rgba(197, 160, 89, 0.2);
+            line-height: 1;
         }
 
         .and-symbol {
             font-family: 'Cinzel Decorative', serif;
             font-size: clamp(1.2rem, 4vw, 1.5rem);
-            margin: 5px 0;
+            margin: 6px 0;
             display: block;
         }
 
@@ -144,13 +143,13 @@
             font-family: 'Cinzel Decorative', serif;
             font-size: clamp(1.1rem, 3.5vw, 1.4rem);
             letter-spacing: 2px;
-            margin-top: 15px;
+            margin-top: 10px;
             margin-bottom: 10px;
         }
 
         .divider {
             height: 1px;
-            background: linear-gradient(to right, transparent, #d4af37, #ec4899, transparent);
+            background: linear-gradient(to right, transparent, #c5a059, #8c6a27, transparent);
             margin: 18px auto;
             width: 80%;
         }
@@ -158,7 +157,7 @@
         .date-box {
             font-size: clamp(0.95rem, 2.8vw, 1.1rem);
             font-weight: 700;
-            color: #161402;
+            color: #4a3b2c;
             letter-spacing: 1px;
             margin-bottom: 15px;
         }
@@ -167,10 +166,10 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 12px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(245, 238, 226, 0.6);
+            padding: 14px 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
             margin: 15px 0;
             gap: 5px;
         }
@@ -180,54 +179,50 @@
         }
 
         .time-item i {
-            color: #d4af37;
-            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #8c6a27;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
         }
 
         .time-item p {
-            font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+            font-size: clamp(0.85rem, 2.2vw, 0.95rem);
             font-weight: 700;
+            color: #4a3b2c;
             margin-top: 4px;
         }
 
         .time-item span {
-            font-size: clamp(0.6rem, 1.8vw, 0.7rem);
-            color: #161402;
+            font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+            color: #7a6855;
             display: block;
+            margin-top: 2px;
         }
 
         .time-sep {
             width: 1px;
-            height: 35px;
-            background: rgba(212, 175, 55, 0.4);
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, rgba(197, 160, 89, 0.6), transparent);
         }
 
         .address {
-            font-size: clamp(0.75rem, 2.2vw, 0.85rem);
-            color: #161402;
+            font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+            color: #5a4632;
             line-height: 1.6;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .landmark {
-            color: #d4af37;
-            font-weight: 500;
+            color: #8c6a27;
+            font-weight: 600;
             display: block;
             margin-top: 4px;
-            font-size: clamp(0.68rem, 2vw, 0.75rem);
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
         }
 
         /* Mobile Adjustments */
         @media screen and (max-width: 380px) {
-            body {
-                padding: 10px 8px;
-            }
-            .pdf-card {
-                border-radius: 16px;
-            }
-            .card-frame {
-                border-radius: 12px;
-            }
+            body { padding: 10px 8px; }
+            .pdf-card { border-radius: 18px; }
+            .card-frame { border-radius: 14px; }
         }
 
         /* Media Print Settings for High Quality PDF */
@@ -243,7 +238,7 @@
 
             .pdf-card {
                 box-shadow: none !important;
-                border: 2px solid #d4af37 !important;
+                border: 1px solid #c5a059 !important;
                 page-break-inside: avoid;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
@@ -266,14 +261,16 @@
     <!-- Card Content Area -->
     <div class="pdf-card" id="cardContent">
         <div class="card-frame">
-            <div class="bismillah gradient-text">In The Name Of Allah</div>
+            <div class="bismillah gradient-text">In the name of Allah, <br> THE MOST GRACIOUS, THE MOST MERCIFUL</div>
             
             <div class="hosts">Mr. & Mrs. Muhammad Imran Ansari</div>
-            <div class="sub-text">cordially request the honor of your presence at the Nikkah ceremony of their daughter</div>
+            <div class="sub-text">Request the pleasure of your company at the Nikkah Ceremony of their daughter</div>
             
             <div class="couple-name">Kashaf</div>
-            <div class="and-symbol gradient-text">&</div>
+            <div class="and-symbol gradient-text">With</div>
             <div class="couple-name">Shayan</div>
+
+            <div class="hosts" style="margin-top: 10px;">Son of Mr. & Mrs. Muhammad Sabir</div>
 
             <div class="divider"></div>
 
